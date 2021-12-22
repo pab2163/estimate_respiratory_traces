@@ -5,7 +5,7 @@ from breathless.AfniRunner import AfniRunner
 from breathless.Filtering import Filtering
 import numpy as np
 import fire
-
+import os
 
 class BreathLess:
     """
@@ -78,6 +78,12 @@ class BreathLess:
             stack_img = nib.Nifti1Image(stack, self.bids_img.nii.affine)
             outname = Path(outpath) / "stack{:02d}_{}.nii.gz".format(ind, imname)
             nib.save(stack_img, str(outname))
+            # multiply voxel thickenss of slices in stacks by the total # of stacks
+            current_slice_thickness = self.bids_img.header['pixdim'][3]
+            new_thickness = self.bids_img.header * len(self.slice_order)
+            print(f'Updating I-S slice thickness from {current_slice_thickness} to {new_thickness}')
+            refit_cmd = f'3drefit -zdel {new_thickness} {str(outname)}'
+            os.system(refit_cmd)
             stack_paths.append(outname)
         return stack_paths
 
