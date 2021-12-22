@@ -1,8 +1,8 @@
 import json
 import nibabel as nib
 from pathlib import Path
-from breathless.AfniRunner import AfniRunner
-from breathless.Filtering import Filtering
+from AfniRunner import AfniRunner
+from Filtering import Filtering
 import numpy as np
 import fire
 import os
