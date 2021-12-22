@@ -79,8 +79,8 @@ class BreathLess:
             outname = Path(outpath) / "stack{:02d}_{}.nii.gz".format(ind, imname)
             nib.save(stack_img, str(outname))
             # multiply voxel thickenss of slices in stacks by the total # of stacks
-            current_slice_thickness = self.bids_img.header['pixdim'][3]
-            new_thickness = self.bids_img.header * len(self.slice_order)
+            current_slice_thickness = self.bids_img.nii.header['pixdim'][3]
+            new_thickness = self.bids_img.nii.header * len(self.slice_order)
             print(f'Updating I-S slice thickness from {current_slice_thickness} to {new_thickness}')
             refit_cmd = f'3drefit -zdel {new_thickness} {str(outname)}'
             os.system(refit_cmd)
