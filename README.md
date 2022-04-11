@@ -10,7 +10,7 @@ BreathLess is a script to extract a predicted respiratory waveform from fMRI dat
 
 1. Install dependencies with 'pip install -r requirements'
 
-2. Run script with 'python BreathLess.py <name_of_bids_file>'
+2. Run script with 'python breathless/breathless.py <name_of_bids_file>'
 
 Requirements: 
 
